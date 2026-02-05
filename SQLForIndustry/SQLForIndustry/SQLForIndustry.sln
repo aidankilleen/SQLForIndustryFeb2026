@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqliteConnection", "SqliteC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseIndependentConnection", "DatabaseIndependentConnection\DatabaseIndependentConnection.csproj", "{2A772CCD-C2DC-4B4A-A57F-F020B2EA01FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EricodeCSVImporter", "EricodeCSVImporter\EricodeCSVImporter.csproj", "{CF96A832-A073-0B00-093F-9754AB1EAB1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2A772CCD-C2DC-4B4A-A57F-F020B2EA01FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A772CCD-C2DC-4B4A-A57F-F020B2EA01FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A772CCD-C2DC-4B4A-A57F-F020B2EA01FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF96A832-A073-0B00-093F-9754AB1EAB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF96A832-A073-0B00-093F-9754AB1EAB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF96A832-A073-0B00-093F-9754AB1EAB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF96A832-A073-0B00-093F-9754AB1EAB1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
