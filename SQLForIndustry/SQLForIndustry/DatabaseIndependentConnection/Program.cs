@@ -12,11 +12,18 @@ public class Program
         
     //}
 
-    public static async Task Main()
+    public static async Task Main(string[] args)
     {
         //Console.WriteLine("Database Independent Connection");
 
-        var appBuilder = Host.CreateApplicationBuilder();
+        var appBuilder = Host.CreateApplicationBuilder(args);
+
+        appBuilder.Configuration.AddUserSecrets<Program>();
+
+
+        var password = appBuilder.Configuration["masterpassword"];
+        Console.WriteLine($"Secret password{password}");
+
 
         string? appName = appBuilder
                             .Configuration
@@ -25,14 +32,30 @@ public class Program
 
         Console.WriteLine(appName);
 
+        var environmentName = appBuilder.Environment.EnvironmentName;
+        Console.WriteLine(environmentName);
 
-        
-        var provider = "Microsoft.Data.Sqlite";
-        var connectionStringBuilder = new SqliteConnectionStringBuilder
+        string provider;
+        string connectionString;
+        if (environmentName.Equals("Production"))
         {
-            DataSource = "c:\\work\\training\\databases\\userdb.db",
-        };
-        
+            provider = "MySqlConnector";
+            connectionString = appBuilder.Configuration.GetConnectionString("mysql");
+        }
+        else
+        {
+            provider = "Microsoft.Data.Sqlite";
+            connectionString = appBuilder.Configuration.GetConnectionString("sqlite");
+        }
+        //Console.WriteLine(appBuilder.Environment.);
+
+
+        /*
+        var connectionStringBuilder = new SqliteConnectionStringBuilder
+       {
+           DataSource = "c:\\work\\training\\databases\\userdb.db",
+       };
+       */
         /*
         var provider = "MySqlConnector";
         var builder = new MySqlConnectionStringBuilder
@@ -44,7 +67,9 @@ public class Program
             Password = "xxx"
         };
         */
-        await RunSelect(provider, connectionStringBuilder.ConnectionString);
+        //await RunSelect(provider, connectionStringBuilder.ConnectionString);
+        await RunSelect(provider, connectionString);
+
     }
 
     public static DbProviderFactory GetFactory(string provider)
