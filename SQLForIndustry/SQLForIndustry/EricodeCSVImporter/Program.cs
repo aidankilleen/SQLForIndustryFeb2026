@@ -6,7 +6,9 @@ using Microsoft.Data.Sqlite;
 internal static class Program
 {
     private const string CsvPath = @"c:\temp\eircode_test.csv";
-    private const string DbPath = @"c:\work\training\databases\eircode_import.db";
+    //private const string CsvPath = @"C:\work\training\sqlforindustryfeb2026\eircode_changed.csv";
+    private const string DbPath = @"c:\work\training\databases\eircode_import_final_really.db";
+    private const string TableName = "Eircodes";
 
     private static void Main()
     {
@@ -44,15 +46,15 @@ internal static class Program
     {
         using var cmd = conn.CreateCommand();
         cmd.CommandText =
-        """
-        CREATE TABLE IF NOT EXISTS Eircodes (
+        $"""
+        DROP TABLE IF EXISTS {TableName};
+        CREATE TABLE IF NOT EXISTS {TableName} (
             Id     INTEGER PRIMARY KEY AUTOINCREMENT,
             County TEXT    NOT NULL,
             Eircode TEXT   NOT NULL
         );
 
-        CREATE INDEX IF NOT EXISTS IX_Eircodes_Eircode ON Eircodes(Eircode);
-        CREATE INDEX IF NOT EXISTS IX_Eircodes_County  ON Eircodes(County);
+        CREATE INDEX IF NOT EXISTS IX_{TableName}_Eircode ON {TableName}(Eircode);
         """;
         cmd.ExecuteNonQuery();
     }
@@ -75,7 +77,7 @@ internal static class Program
         const int batchSize = 50_000;
 
         using var insert = conn.CreateCommand();
-        insert.CommandText = "INSERT INTO Eircodes (County, Eircode) VALUES ($county, $eircode);";
+        insert.CommandText = $"INSERT INTO {TableName} (County, Eircode) VALUES ($county, $eircode);";
 
         var pCounty = insert.CreateParameter();
         pCounty.ParameterName = "$county";
