@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 internal static class Program
 {
     private const string CsvPath = @"c:\temp\eircode_test.csv";
-    private const string DbPath = @"c:\work\training\databases\eircodes.db";
+    private const string DbPath = @"c:\work\training\databases\eircode_import.db";
 
     private static void Main()
     {
